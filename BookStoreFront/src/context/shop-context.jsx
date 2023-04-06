@@ -1,23 +1,35 @@
 import React, { createContext, useState, useEffect } from "react";
-import { BookDetails } from "../pages/bookDetails/bookDetails";
 
 export const ShopContext = createContext(null);
-
-
 
 export const ShopContextProvider = (props) => {
 
   const [books, setBooks] = useState([]);
+  const [originalBooks, setOriginalBooks] = useState([]);
+  const [searchString, setSearchString] = useState("");
+
 
   useEffect(() => {
     fetch("http://localhost:3000/books/")
       .then((response) => response.json())
       .then((data) => {
+        setOriginalBooks(data)
         setBooks(data);
       })
       .catch((error) => console.log(error));
   }, []);
 
+  useEffect(() => {
+    if (searchString != "") {
+      const results = originalBooks.filter(book =>
+        book.title.toLowerCase().includes(searchString.toLowerCase())
+      );
+      setBooks(results)
+    } else {
+      setBooks(originalBooks)
+    }
+
+  }, [searchString]);
 
   const [cartItems, setCartItems] = useState({});
 
@@ -33,8 +45,6 @@ export const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
-
-
   const addToCart = (itemId) => {
     setCartItems((prev) => {
       if (prev[itemId]) {
@@ -44,8 +54,6 @@ export const ShopContextProvider = (props) => {
       }
     });
   };
-
-
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
@@ -68,9 +76,6 @@ export const ShopContextProvider = (props) => {
   };
 
   const bookDetails = (itemId) => {
-
-
-    console.log("ddedekdjei")
 
 console.log(itemId)
 
@@ -96,6 +101,7 @@ console.log(itemId)
   
   
   const contextValue = {
+    setSearchString,
     cartItems,
     books,
     addToCart,

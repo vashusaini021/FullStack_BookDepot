@@ -16,10 +16,12 @@ function BookDetails() {
     }, []);
     
   return (
-    <div className="bookDetails">
-      <h2>Book Details</h2>
-      <p>Book ID: {book.title}</p>
-      {/* Render the details of the selected book based on the ID */}
+    <div className="product">
+    <img src={book.thumbnailUrl} alt={book.title} />
+    <div className="description">
+      <p> <b>{book.title}</b> </p>
+      <p> ${book.price}</p>
+    </div>
     </div>
   );
 }

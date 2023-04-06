@@ -7,11 +7,17 @@ const CartSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    books: {
-        type: [BookModel.bookSchema],
-        default: [],
-        required: true,
-    }
+    books: [{
+        book: {
+            type: BookModel.bookSchema,
+            required: true,
+        },
+        quantity: {
+            type: Number,
+            default: 1,
+            required: true
+        }
+    }]
 });
 
 const Cart = mongoose.model('Cart', CartSchema);

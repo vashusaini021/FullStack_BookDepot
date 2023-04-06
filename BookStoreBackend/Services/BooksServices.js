@@ -16,4 +16,13 @@ bookRouter.route("/:id").get((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
+//http://localhost:3000/books/title/The%20Great%20Gatsby
+bookRouter.route("/title/:title").get((req, res) => {
+    const searchTitle = req.params.title;
+    const regex = new RegExp(searchTitle, "i");
+    BookModel.Book.find({ title: regex })
+        .then((books) => res.json(books))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = bookRouter;

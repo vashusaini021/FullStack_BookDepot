@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
-import { Link, Routes, Route } from "react-router-dom";
-import { BookDetails } from "../bookDetails/bookDetails";
+import { Link } from "react-router-dom";
 
 export const Product = (props) => {
   const { _id, title, price, thumbnailUrl } = props.data;
-  const { addToCart, cartItems, bookDetails } = useContext(ShopContext);
-  
+  const { addToCart, cartItems } = useContext(ShopContext);
   const cartItemCount = cartItems[_id];
-  const bookDetailsUrl = `/details`;
   return (
     <div className="product">
       <Link to={`/bookDetails/${_id}`}>
@@ -16,7 +13,7 @@ export const Product = (props) => {
       </Link>
       <div className="description">
         <p>
-          <Link>
+          <Link to={`/bookDetails/${_id}`}>
             <b>{title}</b>
           </Link>
         </p>

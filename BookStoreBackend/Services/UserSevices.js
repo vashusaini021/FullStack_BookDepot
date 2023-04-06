@@ -59,19 +59,30 @@ userRouter.route("/signup").post(async (req, res) => {
 userRouter.route("/addBook").post(async (req, res) => {
     const userId = req.body.userId;
     const bookId = req.body.bookId;
+    console.log("vasu");
+
     try {
-        const book = await BookModel.Book.findById(new ObjectId(bookId));
-        console.log("Book find", book);
+        const book_m = await BookModel.Book.findById(new ObjectId(bookId));
+        console.log("Book find", book_m);
         const cart = await Cart.findOne({ "userId" : userId});
         console.log("Cart find", cart);
 
-        console.log("vasu-->", cart.books)
-
         if (cart.books == null) {
             console.log("cart is not intialised till now");
-            cart.books = [book]
+            cart.books = [{ book: book_m, quantity: 1}]
         } else {
-            cart.books.push(book);
+
+            const existingBookIndex = cart.books.findIndex(
+                (cartBook) => cartBook.book._id.toString() === book_m._id.toString()
+            );
+
+            if (existingBookIndex === -1) {
+                console.log("No existing book");
+                cart.books.push({ book: book_m, quantity: 1 })
+            } else {
+                console.log("Existing book");
+                cart.books[existingBookIndex].quantity += 1;
+            }
         }
 
         const savedCart = await cart.save()

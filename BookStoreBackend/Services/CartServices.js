@@ -10,10 +10,7 @@ cartRouter.route("/:id").get(async (req, res) => {
         console.log("Cart find", cart);
         const books = cart.books
         res.status(httpStatus.StatusCodes.OK).json({
-            "Userbooks": {
-                "userId": req.params.id,
-                "books": books
-            }
+            "Cart": cart
         });
     } catch (err) {
         res.status(400).json("Error: " + err);
