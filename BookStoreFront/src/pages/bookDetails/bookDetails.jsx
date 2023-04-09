@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
+import "./bookDetails.css"
 
 function BookDetails() {
         const { id } = useParams();
@@ -16,13 +17,23 @@ function BookDetails() {
     }, []);
     
   return (
-    <div className="product">
+    <div className="details">
+  <div className="bookimg">
     <img src={book.thumbnailUrl} alt={book.title} />
-    <div className="description">
-      <p> <b>{book.title}</b> </p>
-      <p> ${book.price}</p>
-    </div>
-    </div>
+  </div>
+  <div className="description">
+    <h2> <b>{book.title}</b> </h2>
+    <p> <b>Published Date:</b> {new Date(book.publishedDate).toLocaleDateString()} &emsp;| &emsp;
+        <b>ISBN:</b> {book.isbn} &emsp; | &emsp;
+        <b>Page Count:</b> {book.pageCount}</p>
+    <p> <b>Price: ${book.price}</b> </p>
+    <p> <b>Short Description:</b> {book.shortDescription}</p>
+    <p> <b>Long Description:</b> {book.longDescription}</p>
+    <p> <b>Authors:</b> {book.authors} &emsp; | &emsp; 
+        <b>Categories:</b> {book.categories} &emsp;|&emsp;
+        <b>Status:</b> {book.status}</p>
+  </div>
+  </div>
   );
 }
 

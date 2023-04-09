@@ -9,6 +9,20 @@ bookRouter.route("/").get((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
+//http://localhost:3000/books/featuredbooks
+bookRouter.route("/featuredbooks").get((req, res) => {
+    BookModel.Book.find({ isFeatured : true}).limit(10)
+        .then((books) => res.json(books))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//http://localhost:3000/books/bestsellers
+bookRouter.route("/bestsellers").get((req, res) => {
+    BookModel.Book.find({ isBestSeller : true}).limit(10)
+        .then((books) => res.json(books))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
 //http://localhost:3000/books/6422c460d386a575c9dad6d8
 bookRouter.route("/:id").get((req, res) => {
     BookModel.Book.findById(req.params.id)
@@ -20,9 +34,10 @@ bookRouter.route("/:id").get((req, res) => {
 bookRouter.route("/title/:title").get((req, res) => {
     const searchTitle = req.params.title;
     const regex = new RegExp(searchTitle, "i");
-    BookModel.Book.find({ title: regex })
+    BookModel.Book.find({ "title": regex })
         .then((books) => res.json(books))
         .catch((err) => res.status(400).json("Error: " + err));
 });
+
 
 module.exports = bookRouter;

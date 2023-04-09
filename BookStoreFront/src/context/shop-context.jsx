@@ -1,13 +1,15 @@
 import React, { createContext, useState, useEffect } from "react";
+import bookservices from "../services/bookservices";
 
 export const ShopContext = createContext(null);
-
 export const ShopContextProvider = (props) => {
 
   const [books, setBooks] = useState([]);
+  const [user, setUser] = useState(null);
   const [originalBooks, setOriginalBooks] = useState([]);
   const [searchString, setSearchString] = useState("");
-
+  const [featuredBooks, setFeaturedBooks] = useState([]);
+  const [bestSellers, setbestSellers] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/books/")
@@ -21,24 +23,59 @@ export const ShopContextProvider = (props) => {
 
   useEffect(() => {
     if (searchString != "") {
-      const results = originalBooks.filter(book =>
-        book.title.toLowerCase().includes(searchString.toLowerCase())
-      );
-      setBooks(results)
+
+      //LOCAL SEARCH
+      // const results = originalBooks.filter(book =>
+      //   book.title.toLowerCase().includes(searchString.toLowerCase())
+      // );
+
+      //API SEARCH
+      console.log(searchString)
+
+      bookservices.searchBook(searchString)
+        .then(response => {
+          console.log(response.data)
+          setBooks(response.data)
+        }
+        )
+        .catch(error => {
+          console.log(error.response);
+        })
+
+      // setBooks(results)
     } else {
       setBooks(originalBooks)
     }
 
   }, [searchString]);
 
+  useEffect(() => {
+    fetch("http://localhost:3000/books/featuredbooks")
+      .then((response) => response.json())
+      .then((data) => {
+        setFeaturedBooks(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/books/bestsellers")
+      .then((response) => response.json())
+      .then((data) => {
+        setbestSellers(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+
   const [cartItems, setCartItems] = useState({});
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
-        let itemInfo = books.find((b) => b._id === item);
-        if (itemInfo) {
-          totalAmount += cartItems[item] * itemInfo.price;
+      let itemInfo = books.find((b) => b._id === item);
+      if (itemInfo) {
+        totalAmount += cartItems[item] * itemInfo.price;
       }
     }
     console.log(totalAmount)
@@ -57,12 +94,12 @@ export const ShopContextProvider = (props) => {
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
-        if (prev[itemId] > 1) {
-          return { ...prev, [itemId]: prev[itemId] - 1 };
-        } else {
-          const { [itemId]: removedItem, ...updatedItems } = prev;
-          return updatedItems;
-        }
+      if (prev[itemId] > 1) {
+        return { ...prev, [itemId]: prev[itemId] - 1 };
+      } else {
+        const { [itemId]: removedItem, ...updatedItems } = prev;
+        return updatedItems;
+      }
     });
   };
 
@@ -77,33 +114,20 @@ export const ShopContextProvider = (props) => {
 
   const bookDetails = (itemId) => {
 
-console.log(itemId)
-
-        // fetch('http://localhost:3000/books/')
-        //     .then(response => response.json() )
-        //     .then(data => {
-        //       console.log(data)
-        //       setBooks(data)
-        //     })
-        //     .catch(error => console.log(error));
-
-
-
-    // console.log("itemId:", itemId);
-    // const itemInfo = books.find((b) => b.id === itemId);
-    // if (itemInfo) {
-    //   return <BookDetails data={itemInfo} />;
-    // } else {
-    //   console.error(`Book with ID ${itemId} not found`);
-    //   return null;
-    // }
+    console.log(itemId)
   };
-  
-  
+
+
   const contextValue = {
     setSearchString,
+    setUser,
+    user,
+    searchString,
     cartItems,
     books,
+    featuredBooks,
+    bestSellers,
+    setCartItems,
     addToCart,
     bookDetails,
     updateCartItemCount,

@@ -1,16 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
 
 import "./cart.css";
+import cartservices from "../../services/cartservices";
 
 
 function Cart() {
 
-  const { cartItems, getTotalCartAmount, checkout,books } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount, checkout, books, user, setCartItems } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (user !== null) {
+      console.log("user logged In")
+      const userID = user._id
+
+      cartservices.getCartItems(userID)
+        .then(response => {
+          var cartResponsebooks = response.data.Cart.books
+          console.log(cartResponsebooks)
+
+          let carItems = {}
+          for (const index in cartResponsebooks) {
+            const item = cartResponsebooks[index];
+            carItems[item.book._id] = item.quantity
+          }
+          setCartItems(carItems)
+        }
+        )
+        .catch(error => {
+          console.log(error.response);
+        })
+    }
+
+    //check if user exist data from api and set data to cart items just book ids
+
+    //else only cart items
+
+    //integrate first add to cart api
+
+    //search api books
+
+  }, []);
+
 
 
   return (
@@ -49,7 +85,7 @@ function Cart() {
 }
 
 // export const Cart = () => {
-  
+
 //   const { cartItems, getTotalCartAmount, checkout,books } = useContext(ShopContext);
 //   const totalAmount = getTotalCartAmount();
 //   const navigate = useNavigate();
@@ -82,7 +118,7 @@ function Cart() {
 //         <h1> Your Shopping Cart is Empty</h1>
 //       )}
 //     </div>
-    
+
 //   );
 // };
 

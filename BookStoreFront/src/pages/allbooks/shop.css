@@ -1,5 +1,4 @@
 .products {
-  margin-top: 30px;
   width: 100%;
   height: auto;
   display: grid;
@@ -47,3 +46,16 @@
   color: white;
   cursor: pointer;
 }
+
+.fbook {
+    width: 300px;
+    padding: 10px 0px 5px;
+    background: linear-gradient(to right, rgb(255, 191, 0), transparent);
+    display: inline-block;
+  }
+
+.ftext {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 22px;
+  }

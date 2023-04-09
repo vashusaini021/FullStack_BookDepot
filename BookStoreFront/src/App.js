@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar  from "./components/navbar";
 
-import Shop from './pages/shop/shop'
+import Shop from './pages/allbooks/shop'
 
 // import { Shop } from "./pages/shop/shop";
 import { Login } from "./pages/login/login";

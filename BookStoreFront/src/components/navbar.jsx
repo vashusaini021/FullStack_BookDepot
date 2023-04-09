@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import { ShopContext } from "../context/shop-context";
-import { Product } from "../pages/shop/product.jsx"
+import { Product } from "../pages/allbooks/product.jsx"
 import "./navbar.css";
 
 function Navbar()  {

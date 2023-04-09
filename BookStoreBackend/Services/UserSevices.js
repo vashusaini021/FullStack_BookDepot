@@ -17,9 +17,13 @@ const { ObjectId } = require('mongodb');
 userRouter.route("/signup").post(async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
     const newUser = new User({
         email,
-        password
+        password,
+        firstName,
+        lastName
     });
 
     try {
@@ -28,6 +32,9 @@ userRouter.route("/signup").post(async (req, res) => {
 
         const email = savedUser.email;
         const userId = savedUser._id;
+        const firstName = savedUser.firstName;
+        const lastName = savedUser.lastName;
+
         let cartid = "";
 
         const newcart = new Cart({
@@ -42,7 +49,9 @@ userRouter.route("/signup").post(async (req, res) => {
             "UserAdded": {
                 "email": email,
                 "userId": userId,
-                "cartId": cartid
+                "cartId": cartid,
+                "firstName": firstName,
+                "lastName": lastName
             }
         });
     } catch (err) {
@@ -105,12 +114,12 @@ userRouter.route("/addBook").post(async (req, res) => {
 //     "email": "vasu",
 //     "password": "2123"
 // 
-userRouter.route("/signin").post((req, res) => {
+userRouter.route("/login").post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    User.findOne({ email })
-        .then((user) => res.json({ "msg": "Logge In Successfull", "status": httpStatus.StatusCodes.OK}))
+    User.findOne({ "email":  email, "password": password })
+        .then((user) => res.json({ "msg": "Logge In Successfull", "status": httpStatus.StatusCodes.OK, "user": user}))
         .catch((err) => res.status(400).json("Error: " + err));
 });
 

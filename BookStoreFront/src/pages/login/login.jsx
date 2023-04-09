@@ -1,7 +1,50 @@
-import React from "react";
 import "./login.css";
+import React, { useContext, useState, useEffect } from "react";
+import { ShopContext } from "../../context/shop-context";
+import authservice from "../../services/authservice";
+
+
 
 export const Login = () => {
+  
+  const [message, setMessage] = useState('');
+  const { user,setUser } = useContext(ShopContext);
+  
+
+  useEffect(() => {
+    if (user != null) {
+      setMessage(`${user.firstName} ${user.lastName} is already loggedIn`);
+    }
+  }, []);
+
+
+  const loginClick = () => {
+
+    const email = document.querySelector("#floatingInput").value 
+    const password = document.querySelector("#floatingPassword").value 
+    const statusMessage = document.querySelector("#statusMessage")
+
+    const studentLoginRequest = {
+      email,
+      password
+    };
+
+    authservice.login(studentLoginRequest)
+      .then(response => {
+        let student = response.data
+        console.log(student)
+        setUser(student.user)
+        statusMessage.style.color = 'green';
+        setMessage('User LoggedIn Sucessfully');
+      })
+      .catch(error => {
+        statusMessage.style.color = 'red';
+        console.log(error.response.data.message);
+        // setMessage(error.response.data);
+      })
+  }
+
+
   return (
     <div className="text-center">
       <div className="login-form-container w-100 m-auto">
@@ -33,12 +76,14 @@ export const Login = () => {
           <label className="checkbox-primary"> Remember Me </label>
           </div>
 
-          <button
+          <input
             className="w-100 btn btn-lg btn-primary bg-dark"
-            type="submit"
-          >
-            Sign in
-          </button>
+            type="button"
+            value="Sign in"
+            onClick={loginClick}
+          />
+            
+          <div id="statusMessage" style={{ color: 'green' }}>{message}</div>
           <label htmlFor="createAccount" className="signup-link">
             <a href="/signup" className="signup-link">
               Don't have an account? Sign up
