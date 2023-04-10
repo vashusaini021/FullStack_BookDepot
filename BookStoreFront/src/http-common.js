@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axios_obj = axios.create({
-    baseURL: "http://localhost:3000", 
+    baseURL: "https://book-depot.onrender.com", 
     headers: {
         "content-type": "application/json"
     }

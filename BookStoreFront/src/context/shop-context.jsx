@@ -12,7 +12,7 @@ export const ShopContextProvider = (props) => {
   const [bestSellers, setbestSellers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/books/")
+    fetch("https://book-depot.onrender.com/books/")
       .then((response) => response.json())
       .then((data) => {
         setOriginalBooks(data)
@@ -50,7 +50,7 @@ export const ShopContextProvider = (props) => {
   }, [searchString]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/books/featuredbooks")
+    fetch("https://book-depot.onrender.com/books/featuredbooks")
       .then((response) => response.json())
       .then((data) => {
         setFeaturedBooks(data);
@@ -59,7 +59,7 @@ export const ShopContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/books/bestsellers")
+    fetch("https://book-depot.onrender.com/books/bestsellers")
       .then((response) => response.json())
       .then((data) => {
         setbestSellers(data);

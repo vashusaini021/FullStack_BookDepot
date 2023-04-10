@@ -36,15 +36,6 @@ function Cart() {
           console.log(error.response);
         })
     }
-
-    //check if user exist data from api and set data to cart items just book ids
-
-    //else only cart items
-
-    //integrate first add to cart api
-
-    //search api books
-
   }, []);
 
 

@@ -7,7 +7,7 @@ function BookDetails() {
 
     const [book, setBook] = useState({});
       useEffect(() => {
-        fetch(`http://localhost:3000/books/`+id)
+        fetch(`https://book-depot.onrender.com/books/`+id)
             .then(response => response.json() )
             .then(data => {
               console.log(data)
