@@ -123,7 +123,7 @@ userRouter.route("/login").post((req, res) => {
             if(user !== null) {
                 res.json({ "msg": "Logge In Successfull", "status": httpStatus.StatusCodes.OK, "user": user })
             } else {
-                res.status(httpStatus.StatusCodes.OK).json("Error: " + "User not found")
+                res.status(httpStatus.StatusCodes.UNAUTHORIZED).json("Error: " + "User not found")
             }
         })
         .catch((err) => res.status(400).json("Error: " + err));

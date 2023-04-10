@@ -23,7 +23,7 @@ export const ShopContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    if (searchString !== "") {
+    if (searchString != "") {
 
       //LOCAL SEARCH
       // const results = originalBooks.filter(book =>
