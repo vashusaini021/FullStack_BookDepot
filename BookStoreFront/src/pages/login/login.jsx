@@ -39,8 +39,8 @@ export const Login = () => {
       })
       .catch(error => {
         statusMessage.style.color = 'red';
-        console.log(error.response.data.message);
-        // setMessage(error.response.data);
+        console.log(error.response.data);
+        setMessage(error.response.data);
       })
   }
 

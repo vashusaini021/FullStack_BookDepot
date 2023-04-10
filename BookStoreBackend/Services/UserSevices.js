@@ -119,7 +119,13 @@ userRouter.route("/login").post((req, res) => {
     const password = req.body.password;
 
     User.findOne({ "email":  email, "password": password })
-        .then((user) => res.json({ "msg": "Logge In Successfull", "status": httpStatus.StatusCodes.OK, "user": user}))
+        .then((user) => {
+            if(user !== null) {
+                res.json({ "msg": "Logge In Successfull", "status": httpStatus.StatusCodes.OK, "user": user })
+            } else {
+                res.status(httpStatus.StatusCodes.OK).json("Error: " + "User not found")
+            }
+        })
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
