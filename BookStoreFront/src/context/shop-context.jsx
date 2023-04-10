@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import bookservices from "../services/bookservices";
+import { baseURLApp } from "../http-common";
 
 export const ShopContext = createContext(null);
 export const ShopContextProvider = (props) => {
@@ -12,7 +13,7 @@ export const ShopContextProvider = (props) => {
   const [bestSellers, setbestSellers] = useState([]);
 
   useEffect(() => {
-    fetch("https://book-depot.onrender.com/books/")
+    fetch(`${baseURLApp}/books/`)
       .then((response) => response.json())
       .then((data) => {
         setOriginalBooks(data)
@@ -22,7 +23,7 @@ export const ShopContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    if (searchString != "") {
+    if (searchString !== "") {
 
       //LOCAL SEARCH
       // const results = originalBooks.filter(book =>
@@ -50,7 +51,7 @@ export const ShopContextProvider = (props) => {
   }, [searchString]);
 
   useEffect(() => {
-    fetch("https://book-depot.onrender.com/books/featuredbooks")
+    fetch(`${baseURLApp}/books/featuredbooks`)
       .then((response) => response.json())
       .then((data) => {
         setFeaturedBooks(data);
@@ -59,7 +60,7 @@ export const ShopContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch("https://book-depot.onrender.com/books/bestsellers")
+    fetch(`${baseURLApp}/books/bestsellers`)
       .then((response) => response.json())
       .then((data) => {
         setbestSellers(data);

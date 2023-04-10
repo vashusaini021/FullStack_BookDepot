@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import "./bookDetails.css"
+import { baseURLApp } from "../../http-common";
 
 function BookDetails() {
         const { id } = useParams();
 
     const [book, setBook] = useState({});
       useEffect(() => {
-        fetch(`https://book-depot.onrender.com/books/`+id)
+        fetch(`${baseURLApp}/books/`+id)
             .then(response => response.json() )
             .then(data => {
               console.log(data)

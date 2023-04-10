@@ -1,10 +1,11 @@
 import axios from "axios";
 
+const baseURLApp = "https://book-depot.onrender.com";
 const axios_obj = axios.create({
-    baseURL: "https://book-depot.onrender.com", 
+    baseURL: baseURLApp, 
     headers: {
         "content-type": "application/json"
     }
 })
 
-export default axios_obj;
+export { baseURLApp, axios_obj };

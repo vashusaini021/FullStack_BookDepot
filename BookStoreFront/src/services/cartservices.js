@@ -1,4 +1,4 @@
-import axios_obj from "../http-common";
+import { axios_obj } from '../http-common.js';
 
 class CartService {
 
