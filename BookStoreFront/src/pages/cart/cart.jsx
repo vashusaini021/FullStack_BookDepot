@@ -9,7 +9,7 @@ import cartservices from "../../services/cartservices";
 
 function Cart() {
 
-  const { cartItems, getTotalCartAmount, checkout, books, user, setCartItems } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount, books, user, setCartItems } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   const navigate = useNavigate();
 

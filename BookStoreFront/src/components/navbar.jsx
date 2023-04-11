@@ -37,9 +37,9 @@ function Navbar() {
         </div>
       )}
         <div className="shopTitle">
-        <a href="/">
-            <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt="Book Store" className="logo" />
-        </a>
+        <Link to="/">
+          <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt="Book Store" className="logo" />
+        </Link>
 
           {/* <h1><a href="/">Book Store</a></h1> */}
         </div>

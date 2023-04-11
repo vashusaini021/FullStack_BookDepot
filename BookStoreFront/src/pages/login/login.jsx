@@ -2,6 +2,8 @@ import "./login.css";
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../context/shop-context";
 import authservice from "../../services/authservice";
+import { Link } from "react-router-dom";
+
 
 
 
@@ -85,9 +87,10 @@ export const Login = () => {
             
           <div id="statusMessage" style={{ color: 'green' }}>{message}</div>
           <label htmlFor="createAccount" className="signup-link">
-            <a href="/signup" className="signup-link">
+
+            <Link to="/signup">
               Don't have an account? Sign up
-            </a>
+            </Link>
           </label>
         </form>
       </div>
