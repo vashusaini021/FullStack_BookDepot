@@ -15,15 +15,11 @@ app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const allowedOrigins = ["https://book-depot-eta.vercel.app", "http://localhost:3000"];
+
 app.use(cors({
-    origin: "https://book-depot-eta.vercel.app"
+    origin: allowedOrigins
 }));
-
-// app.use(cors({
-//     origin: "http://localhost:3001"
-// }));
-
-
 
 
 db.once('open', async () => {
