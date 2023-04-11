@@ -17,9 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const allowedOrigins = ["https://book-depot-eta.vercel.app", "http://localhost:3000"];
 
-app.use(cors({
-    origin: allowedOrigins
-}));
+// app.use(cors({
+//     origin: allowedOrigins
+// }));
+app.use(cors());
 
 
 db.once('open', async () => {
