@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .cartItem {
@@ -17,11 +18,12 @@
 
 .cartItem img {
   width: 200px;
+  padding: 15px;
 }
 
-.cartItem .description {
-  width: 100%;
-  font-size: 30px;
+.cartItem .desc {
+  font-size: 20px;
+  
 }
 
 .countHandler input {
@@ -31,7 +33,7 @@
 }
 
 .checkout button {
-  width: 150px;
+  width: 180px;
   height: 50px;
   background-color: rgb(19, 19, 19);
   color: white;
@@ -39,4 +41,12 @@
   border-radius: 8px;
   margin: 10px;
   cursor: pointer;
+}
+
+.checkout button:hover {
+  background-color: red;
+}
+.empty {
+  font-style: italic;
+  color: red;
 }

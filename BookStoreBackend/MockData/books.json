@@ -332,7 +332,7 @@
    },
    {
       "price":"200",
-      "isFeatured":true,
+      "isFeatured":false,
       "isBestSeller":false,
       "title":"Distributed Application Development with PowerBuilder 6.0",
       "isbn":"1884777686",
@@ -371,7 +371,7 @@
    },
    {
       "price":"200",
-      "isFeatured":false,
+      "isFeatured":true,
       "isBestSeller":false,
       "title":"Taming Jaguar",
       "isbn":"1884777686",

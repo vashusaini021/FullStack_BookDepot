@@ -2,30 +2,34 @@
   top: 0;
   position: fixed;
   width: 100%;
-  background-color: rgb(19, 19, 19);
+  background-color: #675D50;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .shopTitle {
-  margin: 10px;
   text-align: center;
   font-size: 30px;
   color: white;
 }
 
 .links {
-  margin: 10px;
+  padding: 10px;
   display: flex;
   align-items: center;
 }
 
 .links a {
-  margin: 10px;
+  text-align: center;
+  width: 80px;
+  padding: 10px;
   text-decoration: none;
   color: white;
-  font-size: 23px;
+  font-size: 21px;
+  font-weight:600;
 }
 
 .links a:hover {
@@ -52,4 +56,15 @@
   color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
+}
+
+.search-input {
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.logo {
+  width: 250px;
 }

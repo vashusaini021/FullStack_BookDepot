@@ -37,15 +37,13 @@ export const Product = (props) => {
         <img src={thumbnailUrl} alt={title} />
       </Link>
       <div className="description">
-        <p>
           <Link to={`/bookDetails/${_id}`}>
             <b>{title}</b>
           </Link>
-        </p>
-        <p> ${price}</p>
+          <br/>
+        ${price}
       </div>
-      <button className="addToCartBttn" onClick={()=>addToCartAction(_id)}>
-        Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
+      <button className="addToCartBttn" onClick={()=>addToCartAction(_id)}> Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
       </button>
     </div>
   );

@@ -43,7 +43,7 @@ function Cart() {
   return (
     <div className="cart">
       <div>
-        <h1>Your Cart Items</h1>
+        <h2><b>Your Cart Items</b></h2>
       </div>
       <div className="cart">
         {books.map((book) => {
@@ -56,18 +56,10 @@ function Cart() {
         <div className="checkout">
           <p> Subtotal: ${totalAmount} </p>
           <button onClick={() => navigate("/")}> Continue Shopping </button>
-          <button
-            onClick={() => {
-              checkout();
-              navigate("../../checkout");
-            }}
-          >
-            {" "}
-            Checkout{" "}
-          </button>
+          <button onClick={() => navigate("/")}> Checkout </button>
         </div>
       ) : (
-        <h1> Your Shopping Cart is Empty</h1>
+        <h5 className="empty"> Your Shopping Cart is Empty</h5>
       )}
     </div>
 

@@ -4,7 +4,7 @@ import "./shop.css";
 function Label(props) {
     return (
         <div className="fbook">
-        <h5 className="ftext"> &emsp; {props.title} </h5>{" "}
+        <h3 className="ftext"> &emsp; {props.title} </h3>{" "}
       </div>
     )
   }

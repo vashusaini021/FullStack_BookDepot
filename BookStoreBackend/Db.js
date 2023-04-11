@@ -4,8 +4,6 @@ require('dotenv').config()
 // const uri = "mongodb://localhost:27017/books_depot";
 const uri = process.env.DB_URL;
 
-console.log("vasu-->"+uri)
-
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 
